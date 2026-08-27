@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -20,7 +20,33 @@ function ScrollToTop() {
   return null
 }
 
+function LoadingScreen() {
+  return (
+    <div className="site-loader" role="status" aria-label="Loading Ratna Hospital">
+      <div className="site-loader__mark" aria-hidden="true">
+        <span className="site-loader__arc site-loader__arc--top" />
+        <span className="site-loader__arc site-loader__arc--bottom" />
+        <svg className="site-loader__pulse" viewBox="0 0 68 32" fill="none">
+          <path
+            d="M2 16H14L18 16L22 7L28 25L34 16H66"
+            pathLength="1"
+          />
+        </svg>
+      </div>
+    </div>
+  )
+}
+
 function App() {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoading(false), 1200)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  if (loading) return <LoadingScreen />
+
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />

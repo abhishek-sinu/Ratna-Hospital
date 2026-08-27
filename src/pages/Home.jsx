@@ -1,6 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiCalendar, FiArrowRight, FiCheckCircle, FiImage, FiMail } from 'react-icons/fi'
+import {
+  FiCalendar,
+  FiArrowLeft,
+  FiArrowRight,
+  FiCheckCircle,
+  FiMail,
+} from 'react-icons/fi'
 import StatsSection from '../components/StatsSection'
 import ServiceCard from '../components/ServiceCard'
 import DoctorCard from '../components/DoctorCard'
@@ -14,15 +20,42 @@ import {
   NEWS,
 } from '../data/siteData'
 
-const HIGHLIGHTS = [
-  'Advanced ICU & 24/7 emergency care',
-  'Experienced specialist doctors',
-  '53+ well-equipped hospital rooms',
-  'Modern surgical facilities',
+const CLEANLINESS_IMAGES = [
+  { src: '/bed%20cleaning.png', alt: 'Hospital bed being cleaned' },
+  { src: '/cleaning%20floor.png', alt: 'Hospital floor being cleaned' },
+  { src: '/desk%20cleaning.png', alt: 'Hospital desk being disinfected' },
+  { src: '/staff%20cleaniness.png', alt: 'Hospital staff maintaining cleanliness' },
+  { src: '/training.png', alt: 'Hospital staff hygiene training' },
+  { src: '/dispose.png', alt: 'Proper hospital waste disposal' },
+]
+
+const HERO_IMAGES = [
+  { src: '/hospital%20main%20entrance.png', alt: 'Ratna Hospital main entrance' },
+  { src: '/ICU.jpg', alt: 'Ratna Hospital intensive care unit' },
+  { src: '/Front%20office.jpg', alt: 'Ratna Hospital front office' },
 ]
 
 export default function Home() {
   const [subscribed, setSubscribed] = useState(false)
+  const [activeHeroImage, setActiveHeroImage] = useState(0)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroImage((current) => (current + 1) % HERO_IMAGES.length)
+    }, 5000)
+
+    return () => window.clearInterval(timer)
+  }, [])
+
+  function showPreviousHeroImage() {
+    setActiveHeroImage(
+      (current) => (current - 1 + HERO_IMAGES.length) % HERO_IMAGES.length,
+    )
+  }
+
+  function showNextHeroImage() {
+    setActiveHeroImage((current) => (current + 1) % HERO_IMAGES.length)
+  }
 
   function handleSubscribe(e) {
     e.preventDefault()
@@ -62,16 +95,51 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-white/10 p-6 backdrop-blur">
-            <h2 className="mb-4 text-xl font-semibold">Why Choose Us</h2>
-            <ul className="space-y-3">
-              {HIGHLIGHTS.map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <FiCheckCircle className="shrink-0 text-lg text-green-300" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-2xl">
+            {HERO_IMAGES.map((image, index) => (
+              <img
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                  index === activeHeroImage ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+            ))}
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent px-4 pb-4 pt-12">
+              <div className="flex gap-2" aria-label="Hero image slides">
+                {HERO_IMAGES.map((image, index) => (
+                  <button
+                    key={image.src}
+                    type="button"
+                    onClick={() => setActiveHeroImage(index)}
+                    className={`h-2.5 w-2.5 rounded-full border border-white transition ${
+                      index === activeHeroImage ? 'bg-white' : 'bg-white/35'
+                    }`}
+                    aria-label={`Show slide ${index + 1}: ${image.alt}`}
+                    aria-current={index === activeHeroImage ? 'true' : undefined}
+                  />
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={showPreviousHeroImage}
+                  className="rounded-full bg-black/30 p-2 text-white transition hover:bg-black/60"
+                  aria-label="Previous hospital image"
+                >
+                  <FiArrowLeft />
+                </button>
+                <button
+                  type="button"
+                  onClick={showNextHeroImage}
+                  className="rounded-full bg-black/30 p-2 text-white transition hover:bg-black/60"
+                  aria-label="Next hospital image"
+                >
+                  <FiArrowRight />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -144,9 +212,17 @@ export default function Home() {
             </h2>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.map((service) => (
+            {SERVICES.slice(0, 4).map((service) => (
               <ServiceCard key={service.title} {...service} />
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-dark"
+            >
+              See More Services <FiArrowRight />
+            </Link>
           </div>
         </div>
       </section>
@@ -180,13 +256,13 @@ export default function Home() {
             </ul>
           </div>
           <div className="grid grid-cols-3 gap-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex aspect-square items-center justify-center rounded-xl bg-primary/5 text-primary"
-              >
-                <FiImage className="text-3xl" />
-              </div>
+            {CLEANLINESS_IMAGES.map((image) => (
+              <img
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                className="aspect-square w-full rounded-xl object-cover"
+              />
             ))}
           </div>
         </div>

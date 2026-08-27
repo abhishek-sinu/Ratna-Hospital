@@ -119,6 +119,36 @@ export const SERVICES = [
       'Modern fixation techniques for faster healing and better recovery from complex fractures.',
     icon: 'FaShieldAlt',
   },
+  {
+    title: 'Ophthalmology',
+    description:
+      'Comprehensive eye care, diagnosis, and treatment for a wide range of vision and eye health conditions.',
+    icon: 'FaEye',
+  },
+  {
+    title: 'Neuro Surgery',
+    description:
+      'Specialized surgical care for disorders affecting the brain, spine, and nervous system.',
+    icon: 'FaBrain',
+  },
+  {
+    title: 'General Surgery',
+    description:
+      'Expert surgical treatment for common and complex conditions with careful pre- and post-operative care.',
+    icon: 'FaStethoscope',
+  },
+  {
+    title: 'Laparoscopic Surgery',
+    description:
+      'Minimally invasive surgical procedures designed to support faster recovery and reduced discomfort.',
+    icon: 'FaProcedures',
+  },
+  {
+    title: 'ENT Surgery',
+    description:
+      'Diagnosis and surgical treatment for ear, nose, throat, and related head and neck conditions.',
+    icon: 'FaLungs',
+  },
 ]
 
 export const DOCTORS = [

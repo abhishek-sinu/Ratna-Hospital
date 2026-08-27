@@ -7,6 +7,10 @@ import {
   FaSyringe,
   FaTooth,
   FaShieldAlt,
+  FaEye,
+  FaBrain,
+  FaProcedures,
+  FaLungs,
 } from 'react-icons/fa'
 
 const ICONS = {
@@ -18,6 +22,10 @@ const ICONS = {
   FaSyringe,
   FaTooth,
   FaShieldAlt,
+  FaEye,
+  FaBrain,
+  FaProcedures,
+  FaLungs,
 }
 
 export default function ServiceCard({ title, description, icon }) {

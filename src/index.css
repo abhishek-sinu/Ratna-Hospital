@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0d6e6e;
-  --color-primary-dark: #094f4f;
-  --color-primary-light: #14a3a3;
-  --color-accent: #e63946;
+  --color-primary: #164b78;
+  --color-primary-dark: #0d3157;
+  --color-primary-light: #8b3fa8;
+  --color-accent: #d62978;
   --font-sans: "Segoe UI", system-ui, Roboto, sans-serif;
 }
 
@@ -16,6 +16,91 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: #10222a;
+}
+
+.site-loader {
+  align-items: center;
+  background: linear-gradient(135deg, #0d3157 0%, #164b78 56%, #8b3fa8 100%);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+}
+
+.site-loader__mark {
+  height: 7rem;
+  position: relative;
+  width: 7rem;
+}
+
+.site-loader__arc {
+  border: 4px solid #fff;
+  border-radius: 50%;
+  height: 5.8rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 5.8rem;
+}
+
+.site-loader__arc--top {
+  animation: loader-spin 1.4s linear infinite;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.site-loader__arc--bottom {
+  animation: loader-spin-reverse 1.4s linear infinite;
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+
+.site-loader__pulse {
+  height: 2rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4.25rem;
+}
+
+.site-loader__pulse path {
+  animation: loader-pulse 1.2s ease-in-out infinite;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes loader-spin-reverse {
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes loader-pulse {
+  0%,
+  15% {
+    stroke-dasharray: 0 1;
+    opacity: 0.45;
+  }
+  55%,
+  85% {
+    stroke-dasharray: 1 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 0 1;
+    opacity: 0.45;
+  }
 }
 
 .container-x {

@@ -4,7 +4,7 @@ import { CONTACT, NAV_LINKS } from '../data/siteData'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0b2a2a] text-gray-300">
+    <footer className="bg-primary-dark text-gray-300">
       <div className="container-x grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="mb-3 flex items-center gap-2">
