@@ -9,7 +9,7 @@ const GALLERY_CATEGORIES = [
   { label: 'Cleanliness & Hygiene', image: '/dispose.png' },
   { label: 'Reception & Lobby' , image: '/Front office.jpg'},
   { label: 'Pharmacy' , image: '/pharmacy.jpeg'},
-  { label: 'Emergency Ward' },
+  { label: 'Emergency Ward' , image: '/emergency ward.jpg'},
 ]
 
 export default function Gallery() {
