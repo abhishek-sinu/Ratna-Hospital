@@ -5,10 +5,10 @@ const GALLERY_CATEGORIES = [
   { label: 'Hospital Building', image: '/hospital main entrance.png' },
   { label: 'ICU & Critical Care' , image: '/ICU.jpg'},
   { label: 'Operation Theatre', image: '/cleaning floor.png' },
-  { label: 'Patient Rooms' },
+  { label: 'Patient Rooms', image: 'patient room.jpeg'},
   { label: 'Cleanliness & Hygiene', image: '/dispose.png' },
   { label: 'Reception & Lobby' , image: '/Front office.jpg'},
-  { label: 'Pharmacy' },
+  { label: 'Pharmacy' , image: '/pharmacy.jpeg'},
   { label: 'Emergency Ward' },
 ]
 
